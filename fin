@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# la fin (français, n.f.): end
+
+# https://stackoverflow.com/a/4774063/6748004
+DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+DESK="$DIR/desk"
+SOLVED="$DIR/solved"
+
+PROBLEM=$1
+
+SRC="$DESK/$PROBLEM.py"
+DEST="$SOLVED/$PROBLEM.py"
+
+if [ -f "$DEST" ]; then
+	echo "$DEST already exists"
+	exit 1
+fi
+
+mv "$SRC" "$DEST"
