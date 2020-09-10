@@ -16,3 +16,5 @@ fi
 
 mkdir -p "$DESK"
 sed -E "2s/(problem=)\?/\1$PROBLEM/g" "$SRC" > "$DEST"
+
+if command -v subl &> /dev/null; then subl "$DEST"; fi
