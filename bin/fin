@@ -17,7 +17,4 @@ if [ -f "$DEST" ]; then
     exit 1
 fi
 
-# TODO: `git mv` when you decide to allow desk files to be committed.
-mv "$SRC" "$DEST"
-git add "$DEST"
-git commit -m "Add solution for problem $PROBLEM"
+git mv "$SRC" "$DEST"
