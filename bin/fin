@@ -17,4 +17,6 @@ if [ -f "$DEST" ]; then
     exit 1
 fi
 
+# TODO: add command-line option for committing.
+
 mv "$SRC" "$DEST"
