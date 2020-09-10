@@ -3,7 +3,7 @@
 # gen.: generate
 
 # https://stackoverflow.com/a/4774063/6748004
-DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/.."
 DESK="$DIR/desk"
 
 PROBLEM=$1
