@@ -18,3 +18,5 @@ if [ -f "$DEST" ]; then
 fi
 
 mv "$SRC" "$DEST"
+git add "$DEST"
+git commit -m "Add solution for problem $PROBLEM"
