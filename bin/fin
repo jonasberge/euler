@@ -17,4 +17,4 @@ if [ -f "$DEST" ]; then
     exit 1
 fi
 
-git mv "$SRC" "$DEST"
+mv "$SRC" "$DEST"
