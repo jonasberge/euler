@@ -7,11 +7,11 @@ DATA_DIR = path.abspath(path.join(DIR, '..', 'data'))
 
 
 class Data:
-    def __init__(self, problem_file=None):
-        if not problem_file:
-            problem_file = inspect.stack()[-1][1]
+    def __init__(self, problem_filename=None):
+        if not problem_filename:
+            problem_filename = inspect.stack()[-1][1]
 
-        name = path.basename(problem_file)
+        name = path.basename(problem_filename)
         problem = path.splitext(name)[0]
 
         try:
@@ -25,3 +25,8 @@ class Data:
         filename = path.join(DATA_DIR, problem, filename)
         with open(filename, 'r') as file:
             return file.read()
+
+
+def read_data(filename, problem_filename=None):
+    return Data(problem_filename).read(filename)
+
