@@ -95,5 +95,5 @@ def solve(limit):
 
 limit = int(4e6)
 
-if __name__ == '__main__':
-    print(solve(limit))  # 4613732
+args = (limit,)
+solution = "4613732"

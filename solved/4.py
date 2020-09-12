@@ -170,11 +170,10 @@ def solve():
                 if intlen(a) != factor_digits or intlen(b) != factor_digits:
                     continue
 
-                return a, b
+                return a * b
 
-    return None, None
+    return None
 
 
-if __name__ == '__main__':
-    from functools import reduce
-    print(reduce(lambda a, b: a * b, solve()))  # 906609
+args = ()
+solution = "906609"

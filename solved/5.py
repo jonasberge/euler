@@ -46,5 +46,5 @@ def solve(digits):
 
 digits = 20
 
-if __name__ == '__main__':
-    print(solve(digits))  # 232792560
+args = (digits,)
+solution = "232792560"

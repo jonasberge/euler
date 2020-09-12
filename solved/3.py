@@ -34,7 +34,5 @@ def solve(n):
     return None
 
 
-n = 600851475143
-
-if __name__ == '__main__':
-    print(solve(n))  # 6857
+args = (600851475143,)
+solution = "6857"

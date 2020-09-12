@@ -24,5 +24,5 @@ a = 3
 b = 5
 limit = 1000
 
-if __name__ == '__main__':
-    print(solve(a, b, limit - 1))  # 233168
+args = (a, b, limit - 1)
+solution = "233168"

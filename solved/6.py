@@ -18,5 +18,5 @@ def solve(n):
 
 numbers = 100
 
-if __name__ == '__main__':
-    print(solve(numbers))  # 25164150
+args = (numbers,)
+solution = "25164150"
