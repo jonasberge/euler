@@ -3,10 +3,8 @@ Here you can find my solutions to problems found on the Project Euler website.
 https://projecteuler.net/
 
 
-Create virtualenv:    $ make venv && . activate
-Install dependencies: $ make upgrade
-
-Run: $ python solved/1.py
+Create virtualenv:     $ make venv && . activate
+Install dependencies:  $ make upgrade
 
 
 The project consists of the following relevant directories:
@@ -22,7 +20,7 @@ you can use the following helper commands to manage your solutions:
 
 gen N
 	Generates a script from /template.py and puts it on your desk.
-    N is the unique number of the problem on the projecteuler.net site.
+	N is the unique number of the problem on the projecteuler.net site.
 	Optionally opens the file in Sublime Text if that's installed.
 
 run N
