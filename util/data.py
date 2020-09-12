@@ -1,9 +1,7 @@
 import inspect
 from os import path
 
-
-DIR = path.dirname(path.abspath(__file__))
-DATA_DIR = path.abspath(path.join(DIR, '..', 'data'))
+from .definitions import DATA_DIR
 
 
 class Data:
