@@ -27,7 +27,7 @@ run N
 	Runs problem number N by looking for it in these directories:
 	the current working directory, desk/, solved/ and drawer/.
 
-fin N
+done N
 	Finishes problem number N by moving it into the solved/ folder.
 
 repl
