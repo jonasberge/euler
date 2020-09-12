@@ -19,4 +19,4 @@ def solve():
 
 
 args = ()
-solution = ""
+solution = None
