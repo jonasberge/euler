@@ -3,6 +3,12 @@ Here you can find my solutions to problems found on the Project Euler website.
 https://projecteuler.net/
 
 
+Create virtualenv:    $ make venv && . venv/bin/activate
+Install dependencies: $ make upgrade
+
+Run: $ python solved/1.py
+
+
 You are free to use this directory structure as a skeleton to store your own
 solutions to problems presented on the Project Euler platform. Please make
 sure to also copy the LICENSE.txt stored in the same directory as this file.
@@ -22,6 +28,8 @@ fin <N>  finishes the problem with the number N.
          it is moved into the solved/ folder.
 
 repl     clears the terminal and opens an interactive Python REPL.
-         press CTRL-D to exit.
+         press CTRL-D to exit. press CTRL-L to clear the output buffer.
+
 
 Everything in this repository is licensed under the MIT License.
+Copyright (c) 2020 Jonas van den Berg
