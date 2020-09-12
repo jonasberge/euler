@@ -2,8 +2,6 @@
 
 PROBLEM=$1
 
-DESK_DIR="$ROOT_DIR/desk"
-
 SRC="$ROOT_DIR/template.py"
 DEST="$DESK_DIR/$PROBLEM.py"
 
