@@ -1,7 +1,7 @@
 # Python
 __pycache__
-cache
-venv
+/cache
+/venv
 
 # macOS
 .DS_Store

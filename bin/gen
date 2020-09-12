@@ -2,7 +2,7 @@
 
 PROBLEM=$1
 
-SRC="$ROOT_DIR/template.py"
+SRC="$EULER_DIR/template.py"
 DEST="$DESK_DIR/$PROBLEM.py"
 
 if [ -f "$DEST" ]; then

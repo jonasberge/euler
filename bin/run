@@ -2,4 +2,4 @@
 
 PROBLEM="$1"
 
-python "$ROOT_DIR/run.py" $PROBLEM
+python "$EULER_DIR/run.py" $PROBLEM
