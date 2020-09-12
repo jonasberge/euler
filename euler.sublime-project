@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"desk/.gitkeep",
+				"drawer/.gitkeep"
+			],
+			"folder_exclude_patterns":
+			[
+				"cache",
+				"venv",
+				"__pycache__"
+			],
+			"index_exclude_patterns":
+			[
+			],
+			"path": "."
+		}
+	]
+}

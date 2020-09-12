@@ -1,7 +1,10 @@
-# macOS files
-.DS_Store
-
-# Python files
+# Python
 __pycache__
 cache
 venv
+
+# macOS
+.DS_Store
+
+# Sublime Text
+*.sublime-workspace
