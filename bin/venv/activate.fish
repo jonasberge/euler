@@ -36,7 +36,10 @@ function deactivate
 	set -e DRAWER_DIR
 	set -e SOLVED_DIR
 
-	venv_deactivate
-
 	functions -e deactivate
+
+	functions -c venv_deactivate deactivate
+	functions -e venv_deactivate
+
+	deactivate
 end
