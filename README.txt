@@ -24,6 +24,8 @@ gen <N>  generates a script from /template.py and puts it on your desk.
          N is the unique number of the problem on the projecteuler.net site.
          optionally opens the file in Sublime Text if that's installed.
 
+run <N>  runs the problem with the number N in the current directory.
+
 fin <N>  finishes the problem with the number N.
          it is moved into the solved/ folder.
 

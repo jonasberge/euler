@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PROBLEM="$1"
+
+python "$ROOT_DIR/run.py" $PROBLEM
