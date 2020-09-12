@@ -3,7 +3,7 @@ Here you can find my solutions to problems found on the Project Euler website.
 https://projecteuler.net/
 
 
-Create virtualenv:    $ make venv && . bin/venv/activate
+Create virtualenv:    $ make venv && . activate
 Install dependencies: $ make upgrade
 
 Run: $ python solved/1.py
