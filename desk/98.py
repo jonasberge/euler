@@ -100,6 +100,8 @@ repeat this process for every group.
 from functools import cached_property
 
 from util.data import read_data
+from util.cache import disk_cached
+# TODO: rename util to euler
 
 
 def get_words():
@@ -150,6 +152,7 @@ class Word:
         return self.raw
 
 
+@disk_cached
 def anagram_groups(words):
     words = set(words)
     result = []
