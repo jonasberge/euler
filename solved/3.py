@@ -19,7 +19,7 @@ to find those prime numbers we can utilize the sieve of eratosthenes.
 
 from math import sqrt
 
-from util import sieve
+from euler import sieve
 
 
 def solve(n):

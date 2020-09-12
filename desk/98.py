@@ -99,9 +99,8 @@ repeat this process for every group.
 
 from functools import cached_property
 
-from util.data import read_data
-from util.cache import disk_cached
-# TODO: rename util to euler
+from euler.data import read_data
+from euler.cache import disk_cached
 
 
 def get_words():

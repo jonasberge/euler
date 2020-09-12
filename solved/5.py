@@ -33,7 +33,7 @@ or: 16 = 2 ** 4
 
 from math import floor, log2 as log
 
-from util import sieve
+from euler import sieve
 
 
 def solve(digits):
