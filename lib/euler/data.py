@@ -1,26 +1,32 @@
 import inspect
-from os import path
+import os
 
 from .definitions import DATA_DIR
 
 
 class Data:
     def __init__(self, problem_filename=None):
+        paths = [ problem_filename ]
+
         if not problem_filename:
-            problem_filename = inspect.stack()[-1][1]
+            paths = [ s[1] for s in reversed(inspect.stack()) ]
 
-        name = path.basename(problem_filename)
-        problem = path.splitext(name)[0]
+        for path in paths:
+            filename = os.path.basename(path)
+            problem = os.path.splitext(filename)[0]
 
-        try:
-            self.problem_number = int(problem)
-        except ValueError:
-            raise Exception('Expected file to be named N.py, '
-                            'with N being an integer, got ' + name)
+            try: self.problem_number = int(problem)
+            except ValueError: continue
+
+            return
+
+        raise Exception('Expected file to be named N.py, '
+                        'with N being an integer')
+
 
     def read(self, filename):
         problem = str(self.problem_number)
-        filename = path.join(DATA_DIR, problem, filename)
+        filename = os.path.join(DATA_DIR, problem, filename)
         with open(filename, 'r') as file:
             return file.read()
 
