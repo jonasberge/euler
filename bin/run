@@ -13,8 +13,8 @@ from euler.problem import Script, Problem
 
 assert __name__ == '__main__'
 
-if len(argv) < 2: sys.exit('please specify a problem number')
-if not argv[1].isdigit(): sys.exit('the problem number needs to be numeric')
+if len(argv) < 2: sys.exit('Please specify a problem number')
+if not argv[1].isdigit(): sys.exit('The problem number needs to be numeric')
 
 problem_number = int(argv[1])
 filename = '{}.py'.format(problem_number)
