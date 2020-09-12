@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# la fin (français, n.f.): end
-
 # https://stackoverflow.com/a/4774063/6748004
 DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/.."
 DESK="$DIR/desk"
@@ -17,6 +15,10 @@ if [ -f "$DEST" ]; then
     exit 1
 fi
 
-# TODO: add command-line option for committing.
+# TODO: check if file is tracked, then use git mv, otherwise mv
+# TODO: if it's tracked, stage the file
+# TODO: commit the file if --commit or -c is specified.
+# TODO: use a default message or the string after -c/--commit
+# TODO: default: if tracked: "Move ...", else: "Add .."
 
 mv "$SRC" "$DEST"
