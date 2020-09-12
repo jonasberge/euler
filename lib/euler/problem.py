@@ -17,12 +17,14 @@ DIRECTORIES = [
 
 class Script:
     def __init__(self, filename):
+        path = os.path.abspath(filename)
 
-        for directory in DIRECTORIES:
-            path = os.path.join(directory, filename)
-            if os.path.exists(path):
-                break
-            path = None
+        if not os.path.exists(path):
+            for directory in DIRECTORIES:
+                path = os.path.join(directory, filename)
+                if os.path.exists(path):
+                    break
+                path = None
 
         if not path:
             raise Exception("Unable to locate file {}".format(filename))
