@@ -2,6 +2,8 @@
 
 # gen.: generate
 
+# TODO: use ROOT_DIR env var instead of the trick below.
+
 # https://stackoverflow.com/a/4774063/6748004
 DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/.."
 DESK="$DIR/desk"
