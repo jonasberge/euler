@@ -97,19 +97,82 @@ repeat this process for every group.
 """
 
 
+from functools import cached_property
+
 from util.data import read_data
 
 
-def solve():
+def get_words():
     words = read_data('words.txt')
     words = words.split(',')
-    words = [ w[1:-1].lower() for w in words ]
+    return [ w[1:-1] for w in words ]
 
 
-    print(words)
+class Word:
+    def __init__(self, word):
+        self._raw = word
+        self._value = word.upper()
+
+    @property
+    def raw(self):
+        return self._raw
+
+    @property
+    def value(self):
+        return self._value
+
+    @cached_property
+    def letters(self):
+        return set(self.value)
+
+    @cached_property
+    def occurences(self):
+        word = self.value
+        return { c: word.count(c) for c in word }
+
+    @cached_property
+    def sorted_letter_counts(self):
+        return [ n for n in sorted(self.occurences.values()) ]
+
+    def count(self, char):
+        return self.occurences.get(char.upper(), 0)
+
+    def is_anagram_of(self, other):
+        return self.occurences == other.occurences
+
+    def __len__(self):
+        return len(self._value)
+
+    def __repr__(self):
+        return '{}("{}")'.format(self.__class__.__name__, self.raw)
+
+    def __str__(self):
+        return self.raw
 
 
-    pass
+def anagram_groups(words):
+    words = set(words)
+    result = []
+
+    while words:
+        current = words.pop()
+        group = [ current ]
+
+        for word in words:
+            if current.is_anagram_of(word):
+                group.append(word)
+
+        result.append(group)
+        words -= set(group)
+
+    return result
+
+
+def solve():
+    words = [ Word(w) for w in get_words() ]
+    anagrams = anagram_groups(words)
+
+    print([ g for g in anagrams if len(g) > 1 ])
 
 
 
