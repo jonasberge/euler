@@ -13,22 +13,16 @@ from euler.problem import Script, Problem
 
 assert __name__ == '__main__'
 
-if len(argv) < 2: sys.exit('Please specify a problem number')
-if not argv[1].isdigit(): sys.exit('The problem number needs to be numeric')
-
-problem_number = int(argv[1])
-filename = '{}.py'.format(problem_number)
+if len(argv) < 2: sys.exit('Please specify a problem number, filename or path')
 
 try:
-    script = Script(filename)
-    module = script.create_module()
-    problem = Problem(module)
+    problem = Problem.from_file(argv[1])
 except Exception as e:
     sys.exit(e)
 
 # register the module so that it can be imported if necessary.
 # e.g. the pickle library can't dump classes that it cannot import.
-sys.modules[module.__name__] = module
+sys.modules[problem.module.__name__] = problem.module
 
 result = problem.solve()
 
