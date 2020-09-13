@@ -15,6 +15,15 @@ DIRECTORIES = [
 ]
 
 
+def _problem_number_from_path(path):
+    filename = os.path.basename(path)
+    number = os.path.splitext(filename)[0]
+
+    try: return int(number)
+    except ValueError:
+        return None
+
+
 class Script:
     def __init__(self, file=None, *, number=None):
         if (file is None) == (number is None):
@@ -45,12 +54,7 @@ class Script:
 
     @cached_property
     def problem_number(self):
-        filename = os.path.basename(self.path)
-        number = os.path.splitext(filename)[0]
-
-        try: return int(number)
-        except ValueError:
-            return None
+        return _problem_number_from_path(self.path)
 
     @cached_property
     def uuid(self):
@@ -99,6 +103,18 @@ class Problem:
             raise Exception("The module's function signature of solve() is "
                             "not compatible with the values in 'args'") from e
 
+    @classmethod
+    def from_file(cls, filename):
+        return Problem(Script(filename).create_module())
+
+    @classmethod
+    def from_script(cls, script):
+        return Problem(script.create_module())
+
+    @cached_property
+    def number(self):
+        return _problem_number_from_path(self.module.__file__)
+
     @property
     def module(self):
         return self._module
@@ -131,9 +147,13 @@ class Data:
             paths = [ s[1] for s in reversed(inspect.stack()) ]
 
         for path in paths:
-            problem_number = Script(path).problem_number
-            if problem_number is not None:
-                self._problem_number = problem_number
+            try:
+                script = Script(path)
+            except Exception:
+                continue
+
+            if script.problem_number is not None:
+                self._problem_number = script.problem_number
                 return
 
             # TODO: throw below exception in Script() and
