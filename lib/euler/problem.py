@@ -2,6 +2,7 @@ from functools import cached_property
 import importlib.util as importlib
 import inspect
 import os
+import sys
 import uuid
 
 from .definitions import DATA_DIR, DESK_DIR, DRAWER_DIR, SOLVED_DIR
@@ -96,6 +97,12 @@ class Problem:
         except TypeError as e:
             raise Exception("The module's function signature of solve() is "
                             "not compatible with the values in 'args'") from e
+
+        # register the module so that it can be imported if necessary.
+        # e.g. the pickle library can't dump classes that it cannot import.
+        sys.modules[module.__name__] = module
+
+        # NOTE: we should theoretically unregister the module after usage
 
     @classmethod
     def from_file(cls, filename):

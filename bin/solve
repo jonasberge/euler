@@ -20,10 +20,6 @@ try:
 except Exception as e:
     sys.exit(e)
 
-# register the module so that it can be imported if necessary.
-# e.g. the pickle library can't dump classes that it cannot import.
-sys.modules[problem.module.__name__] = problem.module
-
 result = problem.solve()
 
 print(result)
