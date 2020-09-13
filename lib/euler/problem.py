@@ -16,12 +16,20 @@ DIRECTORIES = [
 
 
 class Script:
-    def __init__(self, filename):
+    def __init__(self, file=None, *, number=None):
+        if (file is None) == (number is None):
+            raise TypeError("__init__() requires exactly one argument")
+
+        filename = str(file if number is None else number)
+
+        if not filename.lower().endswith('.py'):
+            filename += '.py'
+
         path = os.path.abspath(filename)
 
         if not os.path.exists(path):
             for directory in DIRECTORIES:
-                path = os.path.join(directory, filename)
+                path = os.path.abspath(os.path.join(directory, filename))
                 if os.path.exists(path):
                     break
                 path = None
