@@ -67,7 +67,7 @@ what we need to do now is map each group of words to a group of numbers:
    to map a digit to a letter without any conflicts.
 
 for each matching pair of groups we need to do one more step.
-a word an a number are not guaranteed to be compatible with eachother yet
+a word and a number are not guaranteed to be compatible with eachother yet
 because it's possible that a number that occurs multiple times is associated
 with two different letters that aren't at the right position, e.g.:
 
@@ -84,9 +84,11 @@ groups are compatible we do the following:
    then ignore this number and continue at step (2)
 5. memorise this word-number pair and go to (2)
 
+TODO: rework this ->
+
 now we have a list of word-number pairs that are compatible with eachother.
-if there's only only pair, then we ignore this group, as it's not possible
-to create a square anagram word pair with only one word.
+if there's only one pair for a word then we ignore it, as it's not
+possible to create a square anagram word pair with only one word.
 
 otherwise, any word-number pair can be combined with every other pair to
 form a square anagram word pair. we can then pick the largest square number
@@ -97,7 +99,10 @@ repeat this process for every group.
 """
 
 
+from collections import defaultdict
+from itertools import groupby
 from functools import cached_property
+from math import floor, ceil, sqrt
 
 from euler.problem import read_data
 from euler.cache import disk_cached
@@ -132,6 +137,10 @@ class Word:
         return { c: word.count(c) for c in word }
 
     @cached_property
+    def sorted_characters(self):
+        return ''.join(sorted(self.value))
+
+    @cached_property
     def sorted_letter_counts(self):
         return [ n for n in sorted(self.occurences.values()) ]
 
@@ -145,39 +154,79 @@ class Word:
         return len(self._value)
 
     def __repr__(self):
-        return '{}("{}")'.format(self.__class__.__name__, self.raw)
+        return '{}({!r})'.format(self.__class__.__name__, self.raw)
 
     def __str__(self):
         return self.raw
 
 
 @disk_cached
-def anagram_groups(words):
-    words = set(words)
-    result = []
-
-    while words:
-        current = words.pop()
-        group = [ current ]
-
-        for word in words:
-            if current.is_anagram_of(word):
-                group.append(word)
-
-        result.append(group)
-        words -= set(group)
-
-    return result
+def group_anagrams(words):
+    key = lambda w: w.sorted_characters
+    words = sorted(words, key=key)
+    anagrams = groupby(words, key)
+    return [ list(g) for _, g in anagrams ]
 
 
 def solve():
-    words = [ Word(w) for w in get_words() ]
-    anagrams = anagram_groups(words)
 
-    print([ g for g in anagrams if len(g) > 1 ])
+    words = map(Word, get_words())
+    words = [ w for w in words if len(w.letters) <= 10 ]
+
+    anagrams = group_anagrams(words)
+    anagrams = [ g for g in anagrams if len(g) > 1 ]
 
 
+    square_anagrams_for_digits = dict()
+
+    for digits in range(1, 10 + 1):
+        lo = ceil(sqrt(10 ** (digits - 1)))
+        hi = floor(sqrt(10 ** digits - 1))
+
+        squares = []
+
+        for base in range(lo, hi + 1):
+            square = base ** 2
+            square = Word(str(square))
+            squares.append(square)
+
+        square_anagrams = [ g for g in group_anagrams(squares) if len(g) > 1 ]
+        square_anagrams_for_digits[digits] = square_anagrams
+
+
+    compatibles = defaultdict(list)
+
+    for group in anagrams:
+        for word in group:
+            for numbers in square_anagrams_for_digits[len(word)]:
+                for number in numbers:
+                    char_map, digit_map = dict(), dict()
+                    compatible = True
+                    for char, digit in zip(word.value, number.value):
+                        if char_map.get(char, digit) != digit or \
+                                digit_map.get(digit, char) != char:
+                            compatible = False
+                            break
+                        char_map[char] = digit
+                        digit_map[digit] = char
+                    if not compatible:
+                        continue
+                    items = sorted(char_map.items())
+                    chars = ''.join(str(k) for k, _ in items)
+                    numbers = ''.join(str(v) for _, v in items)
+                    compatibles[chars + numbers].append((word, number))
+
+    compatibles = { k: v for k, v in compatibles.items() if len(v) > 1 }
+
+    highest = 0
+
+    for pairs in compatibles.values():
+        for word, number in pairs:
+            number = int(number.value)
+            highest = max(highest, number)
+
+    return highest
 
 
 args = ()
-solution = None
+solution = 18769
