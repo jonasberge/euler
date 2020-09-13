@@ -109,6 +109,10 @@ class Problem:
         return Problem(Script(filename).create_module())
 
     @classmethod
+    def from_number(cls, number):
+        return cls.from_file(number)
+
+    @classmethod
     def from_script(cls, script):
         return Problem(script.create_module())
 
