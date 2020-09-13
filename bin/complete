@@ -10,6 +10,8 @@ if [ -f "$DEST" ]; then
     exit 1
 fi
 
+# TODO: check if the to be completed problem has a solution.
+
 # TODO: check if file is tracked, then use git mv, otherwise mv
 # TODO: if it's tracked, stage the file
 # TODO: commit the file if --commit or -c is specified.
