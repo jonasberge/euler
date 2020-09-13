@@ -56,8 +56,12 @@ for problem in problems:
         n_unsolved += 1
         continue
 
+    print(stylize('...', colored.attr('dim')), end='', flush=True)
+
     result = str(problem.solve())
     solution = str(problem.solution)
+
+    print('\b\b\b', end='')
 
     if result == solution:
         print(m_ok, result)
