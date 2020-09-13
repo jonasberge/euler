@@ -1,23 +1,32 @@
 {
-	"folders":
-	[
+	"folders": [
 		{
-			"file_exclude_patterns":
-			[
+			"file_exclude_patterns": [
 				"*.sublime-workspace",
 				"desk/.gitkeep",
 				"drawer/.gitkeep"
 			],
-			"folder_exclude_patterns":
-			[
-				"euler/cache",
+			"folder_exclude_patterns": [
 				"euler/venv",
-				"__pycache__"
+				"euler/cache",
+				"__pycache__",
+				".git"
 			],
-			"index_exclude_patterns":
-			[
-			],
+			"index_exclude_patterns": [],
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"todoreview": {
+			"exclude_files": [
+				"*.sublime-workspace"
+			],
+			"exclude_folders": [
+				"*euler/venv*",
+				"*euler/cache*",
+				"*__pycache__*",
+				"*.git*"
+			]
+		}
+	}
 }
