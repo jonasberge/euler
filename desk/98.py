@@ -99,7 +99,7 @@ repeat this process for every group.
 
 from functools import cached_property
 
-from euler.data import read_data
+from euler.problem import read_data
 from euler.cache import disk_cached
 
 
