@@ -27,7 +27,7 @@ solve N
 	Runs (solves) problem number N by looking for it in these directories:
 	the current working directory, desk/, solved/ and drawer/.
 
-complete N
+finish N
 	Finishes problem number N by moving it into the solved/ folder.
 
 check [N1 [N2 [...]]]
