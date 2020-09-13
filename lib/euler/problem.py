@@ -82,11 +82,6 @@ class Problem:
         if not hasattr(module, 'solution'):
             raise Exception("Module does not have a 'solution' variable")
 
-        if module.solution is not None \
-                and not isinstance(module.solution, str):
-            raise Exception("The module's solution is required "
-                            "to be a string (str) or empty (None)")
-
         if not hasattr(module, 'args'):
             raise Exception("Module does not have an 'args' variable")
 
