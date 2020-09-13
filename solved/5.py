@@ -47,4 +47,4 @@ def solve(digits):
 digits = 20
 
 args = (digits,)
-solution = "232792560"
+solution = 232792560

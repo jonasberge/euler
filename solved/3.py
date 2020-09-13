@@ -35,4 +35,4 @@ def solve(n):
 
 
 args = (600851475143,)
-solution = "6857"
+solution = 6857

@@ -96,4 +96,4 @@ def solve(limit):
 limit = int(4e6)
 
 args = (limit,)
-solution = "4613732"
+solution = 4613732

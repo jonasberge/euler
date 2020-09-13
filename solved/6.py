@@ -19,4 +19,4 @@ def solve(n):
 numbers = 100
 
 args = (numbers,)
-solution = "25164150"
+solution = 25164150

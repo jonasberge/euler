@@ -25,4 +25,4 @@ b = 5
 limit = 1000
 
 args = (a, b, limit - 1)
-solution = "233168"
+solution = 233168

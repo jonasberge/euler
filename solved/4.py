@@ -176,4 +176,4 @@ def solve():
 
 
 args = ()
-solution = "906609"
+solution = 906609
