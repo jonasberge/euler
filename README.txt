@@ -30,6 +30,12 @@ run N
 done N
 	Finishes problem number N by moving it into the solved/ folder.
 
+check [N1 [N2 [...]]]
+	Checks if problems N1, N2, ... give the correct solution.
+	If no problem is specified, all solutions in solved/ are tested.
+	This is useful if shared code is modified and you would like
+	to make sure that your solutions are still working correctly.
+
 repl
 	Clears the terminal and opens an interactive Python REPL.
 	Press CTRL-D to exit and CTRL-L to clear the output buffer.

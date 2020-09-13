@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+
+import re
+import os
+import sys
+from sys import argv
+
+import colored
+from colored import stylize
+
+from euler.definitions import SOLVED_DIR
+from euler.problem import Script, Problem
+
+
+assert __name__ == '__main__'
+
+problems = []
+
+for name in argv[1:]:
+    try:
+        script = Script(name)
+    except Exception as e:
+        sys.exit('Could not locate problem {}'.format(name))
+
+    problems.append(Problem.from_script(script))
+
+
+if not problems:
+    for filename in sorted(os.listdir(SOLVED_DIR)):
+        if re.match(r'[0-9]+.py', filename):
+            problems.append(Problem.from_file(filename))
+
+
+n_ok = 0
+n_failed = 0
+n_unsolved = 0
+n_total = len(problems)
+
+c_text = colored.fg('white')
+c_emphasize = c_text + colored.attr('bold')
+c_success = colored.fg('green') + colored.attr('bold')
+c_failure = colored.fg('red') + colored.attr('bold')
+
+m_ok = stylize('ok', c_success)
+m_failed = stylize('failed', c_failure)
+m_unsolved = stylize('unsolved', colored.fg('dark_gray'))
+m_slash = stylize('/', colored.fg('dark_gray'))
+
+m_summary = stylize('summary', colored.fg('white') + colored.attr('underlined'))
+
+for problem in problems:
+    print(stylize(problem.number, c_emphasize), '', end='')
+
+    if problem.solution is None:
+        print(m_unsolved)
+        n_unsolved += 1
+        continue
+
+    result = str(problem.solve())
+    solution = str(problem.solution)
+
+    if result == solution:
+        print(m_ok, result)
+        n_ok += 1
+        continue
+
+    print(m_failed, result, m_slash, solution)
+    n_failed += 1
+
+
+if n_total == 1:
+    sys.exit(0)
+
+parts = []
+
+for n, m in [(n_ok, m_ok), (n_failed, m_failed), (n_unsolved, m_unsolved)]:
+    if n: parts.append('{} {}'.format(stylize(n, c_text), m))
+
+print(m_summary + ':', ', '.join(parts), end='')
+
+if len(parts) > 1:
+    print('', '(of {} total)'.format(n_total), end='')
+
+print()
