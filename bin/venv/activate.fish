@@ -43,3 +43,5 @@ function deactivate
 
 	deactivate
 end
+
+# TODO: add custom PS1: (euler) $ ...
