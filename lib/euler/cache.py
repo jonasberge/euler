@@ -9,8 +9,4 @@ def disk_cached(function):
                   CACHE_DEFAULT_TIMEOUT=0,
                   CACHE_THRESHOLD=0)
 
-    @cache.memoize()
-    def wrapped(*args, **kwargs):
-        return function(*args, **kwargs)
-
-    return wrapped
+    return cache.memoize()(function)
