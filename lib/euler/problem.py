@@ -8,7 +8,6 @@ from .definitions import DATA_DIR, DESK_DIR, DRAWER_DIR, SOLVED_DIR
 
 
 DIRECTORIES = [
-    os.getcwd(),
     DESK_DIR,
     SOLVED_DIR,
     DRAWER_DIR
@@ -37,7 +36,7 @@ class Script:
         path = os.path.abspath(filename)
 
         if not os.path.exists(path):
-            for directory in DIRECTORIES:
+            for directory in [ os.getcwd(), *DIRECTORIES ]:
                 path = os.path.abspath(os.path.join(directory, filename))
                 if os.path.exists(path):
                     break
