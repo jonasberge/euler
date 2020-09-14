@@ -5,7 +5,7 @@ def sieve(n):
     table[0] = table[1] = False  # 0 and 1 are not prime numbers
 
     i = 2
-    while i < n:
+    while i < n - 1:
         for k in range(i + i, n, i):
             table[k] = False
 
