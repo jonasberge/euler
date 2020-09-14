@@ -1,24 +1,64 @@
-def sieve(n):
-    n = n + 1  # our indices are based at 1, not 0
+def primes(limit=None, /, *, start=0, end=None, initial_capacity=17):
 
-    table = [True] * n
-    table[0] = table[1] = False  # 0 and 1 are not prime numbers
+    if limit and limit < 0:
+        raise ValueError('limit may not be less than 0')
 
-    i = 2
-    while i < n - 1:
-        for k in range(i + i, n, i):
-            table[k] = False
+    if end and end < start:
+        raise ValueError('end may not be less than start')
 
-        for j in range(i + 1, n):
-            if table[j]:
-                i = j
+    p, is_prime = 2, True
+
+    if initial_capacity < p:
+        raise ValueError('initial_capacity may not be less than {}'.format(p))
+
+    initial_capacity += start
+    step_size = 7
+
+    # if limit and limit
+
+    table = [ True for _ in range(initial_capacity) ]
+    table[0] = table[1] = False
+
+    primes = []
+    count = 0
+
+    while True:
+        if is_prime:
+
+            if p >= start:
+                if count == limit: return
+                if end and p >= end: return
+
+                yield p
+                count += 1
+
+            primes.append(p)
+
+            for i in range(p + p, len(table), p):
+                table[i] = False
+
+        k = None  # overwrite any value from previous the iteration
+
+        for k in range(p + 1, len(table)):
+            if table[k]:
+                p = k
                 break
 
-        if i != j:
-            break
+        if p == k:
+            is_prime = True
 
-    return [
-        n
-        for n, is_prime in enumerate(table)
-        if is_prime
-    ]
+        if p != k:
+            index = len(table)
+            table.extend(True for _ in range(step_size))
+            step_size += len(primes)
+
+            for prime in primes:
+                first = prime * ((index - 1) // prime + 1)
+
+                for i in range(first, len(table), prime):
+                    table[i] = False
+
+            if k is not None:
+                p = k
+
+            is_prime = False

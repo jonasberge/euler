@@ -12,22 +12,20 @@ until the square root of n and pick the largest that divides n evenly.
 
 this is the solution to the problem.
 
-to find those prime numbers we can utilize the sieve of eratosthenes.
-
 """
 
 
 from math import sqrt
 
-from helper.prime import sieve
+from helper.prime import primes
 
 
 def solve(n):
 
     limit = int(sqrt(n))
-    primes = sieve(limit)
+    numbers = list(primes(end=limit))
 
-    for p in reversed(primes):
+    for p in reversed(numbers):
         if n % p == 0:
             return p
 

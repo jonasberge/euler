@@ -33,12 +33,12 @@ or: 16 = 2 ** 4
 
 from math import floor, log2 as log
 
-from helper.prime import sieve
+from helper.prime import primes
 
 
 def solve(digits):
     product = 1
-    for prime in sieve(digits):
+    for prime in primes(end=digits):
         power = floor(log(digits) / log(prime))
         product *= prime ** power
     return product
