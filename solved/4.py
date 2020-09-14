@@ -37,6 +37,8 @@ from functools import cached_property
 from itertools import chain, takewhile
 from math import floor, ceil, log10, sqrt
 
+from helper.number import count_digits
+
 
 class Number:
     def __init__(self, value):
@@ -145,10 +147,6 @@ def palindrome_numbers(start):
         p = p.next_smaller()
 
 
-def intlen(n):
-    return ceil(log10(n + 1))
-
-
 def solve():
     factor_digits = 3
     largest = 997799  # largest palindrome number below 999 * 999 = 998001
@@ -156,7 +154,7 @@ def solve():
     for p in palindrome_numbers(largest):
 
         factor = ceil(sqrt(p))
-        if intlen(factor) != factor_digits:
+        if count_digits(factor) != factor_digits:
             factor = 10 ** (factor_digits - 1)
 
         for factor in range(factor, 10 ** factor_digits):
@@ -167,7 +165,8 @@ def solve():
                 a = factor + root
                 b = factor - root
 
-                if intlen(a) != factor_digits or intlen(b) != factor_digits:
+                if count_digits(a) != factor_digits or \
+                        count_digits(b) != factor_digits:
                     continue
 
                 return a * b
