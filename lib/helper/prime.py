@@ -28,8 +28,6 @@ class Primes:
     def _extend_capacity(self, amount):
         sieve = self._sieve
 
-        print('resize', amount)
-
         length = len(sieve) + amount
         extended = np.ones(length, dtype=bool)
         extended[:len(sieve)] = sieve
