@@ -146,6 +146,20 @@ class Problem:
         return self.solve_function(*self.args)
 
 
+class LazyProblemModule:
+    def __init__(self, filename):
+        self._filename = filename
+        self._problem = None
+
+    def _init_problem(self):
+        self._problem = Problem.from_file(self._filename)
+
+    def __getattr__(self, name):
+        if not self._problem:
+            self._init_problem()
+        return getattr(self._problem.module, name)
+
+
 class Data:
     def __init__(self, problem_filename=None):
         paths = [ problem_filename ]
