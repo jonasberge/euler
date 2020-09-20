@@ -12,7 +12,7 @@ from helper.number import count_digits
 
 def get_numbers():
     numbers = read_data('numbers.txt')
-    return numbers.strip().split('\n')
+    return numbers.split('\n')
 
 
 def solve(digit_count):
