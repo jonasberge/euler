@@ -9,7 +9,7 @@ import colored
 from colored import stylize
 
 from euler.definitions import SOLVED_DIR
-from euler.problem import Script, Problem
+from euler.problem import Script, Problem, iterate_solved_scripts
 
 
 assert __name__ == '__main__'
@@ -26,9 +26,8 @@ for name in argv[1:]:
 
 
 if not problems:
-    for filename in sorted(os.listdir(SOLVED_DIR)):
-        if re.match(r'[0-9]+.py', filename):
-            problems.append(Problem.from_file(filename))
+    for number, filename in iterate_solved_scripts():
+        problems.append(Problem.from_file(filename))
 
 
 n_ok = 0

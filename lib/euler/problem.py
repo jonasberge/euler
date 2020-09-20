@@ -1,9 +1,11 @@
 from functools import cached_property
+from itertools import takewhile
 import importlib.util as importlib
 import inspect
 import os
 import sys
 import uuid
+import re
 
 from .definitions import DATA_DIR, DESK_DIR, DRAWER_DIR, SOLVED_DIR
 
@@ -178,3 +180,16 @@ class Data:
 
 def read_data(filename, problem_filename=None):
     return Data(problem_filename).read(filename)
+
+
+def iterate_solved_scripts():
+    def keyfunc(x):
+        if x[0].isdigit():
+            return int(''.join(takewhile(str.isdigit, x)))
+        return 0
+
+    for filename in sorted(os.listdir(SOLVED_DIR), key=keyfunc):
+        match = re.match(r'([0-9]+).py', filename)
+        if match:
+            number = int(match.groups()[0])
+            yield number, filename
