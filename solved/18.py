@@ -29,4 +29,4 @@ def solve():
 
 
 args = ()
-solution = None
+solution = 1074

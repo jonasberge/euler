@@ -14,4 +14,4 @@ def solve(n, m):
 
 
 args = (20, 20)
-solution = None
+solution = 137846528820
